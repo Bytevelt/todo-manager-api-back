@@ -41,8 +41,9 @@ namespace TodoManager.Migrations
                     b.Property<bool>("isVisible")
                         .HasColumnType("bit");
 
-                    b.Property<int>("label")
-                        .HasColumnType("int");
+                    b.Property<string>("label")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("priority")
                         .HasColumnType("int");

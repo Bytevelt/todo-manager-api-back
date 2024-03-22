@@ -20,7 +20,7 @@ namespace TodoManager.Migrations
                     priority = table.Column<int>(type: "int", nullable: false),
                     dueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     createdTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    label = table.Column<int>(type: "int", nullable: false),
+                    label = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isVisible = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TodoManager.Data;
 using TodoManager.Models.Domain;
 using TodoManager.Models.DTO;
+using TodoManager.Repositories.Interface;
 
 namespace TodoManager.Controllers
 {
@@ -11,10 +12,10 @@ namespace TodoManager.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
-        public TasksController(ApplicationDbContext dbContext) 
+        private readonly INewTaskRepository newTaskRepository;
+        public TasksController(INewTaskRepository taskRepository) 
         {
-            this.dbContext = dbContext;
+            this.newTaskRepository = taskRepository;
         }
 
         //
@@ -32,8 +33,8 @@ namespace TodoManager.Controllers
                 isVisible = request.isVisible
             };
 
-            await dbContext.Tasks.AddAsync(task);
-            await dbContext.SaveChangesAsync();
+            await newTaskRepository.CreateAsync(task);
+
 
             // Domain model to DTO
             var response = new TaskDto

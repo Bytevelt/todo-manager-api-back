@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoManager.Data;
+using TodoManager.Repositories.Implementation;
+using TodoManager.Repositories.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("TodoManagerConnectionString"));
 });
+builder.Services.AddScoped<INewTaskRepository, NewTaskRepository>();
 
 var app = builder.Build();
 
